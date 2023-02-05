@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ade Takde</title>
+    <style>
+	body {
+        margin: 0;
+      }
+	  
+	  ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.active {
+  background-color: #04AA6D;
+}
+      #myDropdown, #myButton, #myButton2 {
+        display: block;
+        margin: 0 auto;
+      }
+	  
+      #myImages {
+        text-align: center;
+      }
+      #myImages img {
+        width: 15%;
+        height: auto;
+        margin: 1%;
+		border: 6px solid dodgerblue;
+		border-radius: 8px;
+		box-shadow: 10px 10px 5px gray;
+      }
+    </style>
+  </head>
+  <ul>
+  <li><a class="active" href="index.html">Ada Takde</a></li>
+  <li><a href="https://bazliamin90.github.io/suai/">Suai</a></li>
+</ul><br>
+  <body>
+  <button style="margin-left: 10px; margin-top: 30px" TYPE="button" ONCLICK="alert(' 1. Pilih nombor \n 2. Klik: Paparkan Gambar \n 4. Teka dulu gambar mana yang akan kekal \n 5. Klik: Gambar mana yang tinggal? \n 5. Yang betul teka gambar yang tinggal, menang!')">Arahan</button>
+	<select id="myDropdown">
+      <option value="">--Pilih Satu Nombor--</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select><br>	
+    <button id="myButton">Paparkan Gambar</button>
+    <div id="myImages"></div>
+    <button id="myButton2" style="display: none;">Gambar Mana Yang Tinggal?</button>
+    <script>
+      const dropdown = document.getElementById("myDropdown");
+      const button = document.getElementById("myButton");
+      const imagesContainer = document.getElementById("myImages");
+      const button2 = document.getElementById("myButton2");
+      const imageSources = [
+        "./img/image1.jpg",
+        "./img/image2.jpg",
+        "./img/image3.jpg",
+        "./img/image4.jpg",
+        "./img/image5.jpg",
+        "./img/image6.jpg",
+        "./img/image7.jpg",
+        "./img/image8.jpg",
+        "./img/image9.jpg",
+        "./img/image10.jpg",
+		"./img/image11.jpg"
+      ];
+      button.addEventListener("click", function() {
+        imagesContainer.innerHTML = "";
+        let selectedNumber = Number(dropdown.value);
+        if (selectedNumber === 0) {
+          alert("Sila pilih dulu nombor di senarai dropdown");
+        } else {
+          let randomImages = [];
+          while (randomImages.length < selectedNumber) {
+            let randomIndex = Math.floor(Math.random() * imageSources.length);
+            if (!randomImages.includes(randomIndex)) {
+              randomImages.push(randomIndex);
+              let newImage = document.createElement("img");
+              newImage.src = imageSources[randomIndex];
+              imagesContainer.appendChild(newImage);
+            }
+          }
+          setTimeout(function() {
+  button2.style.display = "block";
+}, 1500);
+}
+});
+button2.addEventListener("click", function() {
+  let images = imagesContainer.querySelectorAll("img");
+  let randomIndex = Math.floor(Math.random() * images.length);
+  for (let i = 0; i < images.length; i++) {
+    if (i === randomIndex) {
+      images[i].style.filter = "none";
+    } else {
+      images[i].style.filter = "brightness(0%)";
+    }
+  }
+});
+    </script>
+  </body>
+</html>
+
